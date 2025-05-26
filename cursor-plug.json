@@ -1,0 +1,15 @@
+{
+    "name": "sec-mcp",
+    "version": "1.0.0",
+    "description": "SEC EDGAR MCP Server",
+    "transport": {
+        "type": "sse",
+        "endpoint": "/sse"
+    },
+    "capabilities": {
+        "tools": {
+            "list": true,
+            "call": true
+        }
+    }
+}

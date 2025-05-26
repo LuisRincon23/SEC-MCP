@@ -1,0 +1,34 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "edgar-mcp-tool"
+version = "0.1.0"
+description = "SEC EDGAR MCP Server - Search, Download, and Analyze SEC Filings"
+requires-python = ">=3.10"
+dependencies = [
+    "anyio",
+    "click",
+    "mcp[cli]",
+    "starlette",
+    "uvicorn",
+    "httpx",
+    "aiohttp",
+    "pandas",
+    "lxml",
+    "beautifulsoup4",
+    "python-dateutil",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "playwright>=1.40.0",
+    "httpx>=0.24.0",
+    "pytest-mock>=3.10.0",
+] 
