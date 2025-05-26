@@ -2,6 +2,27 @@
 
 A Server-Sent Events (SSE) Model Context Protocol server for SEC EDGAR data access. Enables both remote and local connections to retrieve SEC filing data, company information, and financial facts.
 
+<div align="center">
+
+[![MCP Protocol](https://img.shields.io/badge/MCP-Protocol-blue)](https://modelcontextprotocol.io)
+[![Python](https://img.shields.io/badge/Python-3.9+-green)](https://python.org)
+[![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
+
+**Integrations:** [Claude Desktop](#-claude-desktop-integration) • [Cursor](#-cursor-ide-integration) • [Cline](#-cline-vs-code-extension-integration) • [Roo Coder](#-roo-coder-integration)
+
+</div>
+
+## 📋 Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Installation](#installation)
+- [Quick Start](#-claude-desktop-integration)
+- [IDE Integrations](#-ide--code-assistant-integrations)
+- [API Examples](#api-examples)
+- [Development](#development)
+- [Troubleshooting](#-troubleshooting)
+
 ## Overview
 
 SEC MCP provides a streamlined interface to access SEC EDGAR data through the Model Context Protocol. It supports real-time data streaming via SSE, making it ideal for both local development and remote deployment scenarios.
@@ -60,7 +81,8 @@ The server will start on the specified port, ready to accept both local and remo
    {
      "mcpServers": {
        "SEC-MCP": {
-         "command": "/path/to/SEC-MCP/start-mcp.sh"
+         "command": "/path/to/SEC-MCP/start-mcp.sh"  // macOS/Linux
+         // "command": "C:\\path\\to\\SEC-MCP\\start-mcp.bat"  // Windows
        }
      }
    }
@@ -142,6 +164,131 @@ If you encounter issues:
    - **"spawn ENOENT"**: The path to `uv` or the script is incorrect
    - **"No module named..."**: Working directory (`cwd`) is incorrect
    - **Server disconnects**: Check that all dependencies are installed with `uv sync`
+
+## 🔌 IDE & Code Assistant Integrations
+
+### 💻 Cursor IDE Integration
+
+[Cursor](https://cursor.sh) is an AI-powered IDE that supports MCP servers natively.
+
+<details>
+<summary><b>📋 Cursor Setup Instructions</b></summary>
+
+1. **Open Cursor Settings**
+   - Press `Cmd+,` (macOS) or `Ctrl+,` (Windows/Linux)
+   - Navigate to `Features` → `MCP Servers`
+
+2. **Add SEC-MCP Configuration**
+   ```json
+   {
+     "SEC-MCP": {
+       "command": "/path/to/SEC-MCP/start-mcp.sh"  // macOS/Linux
+       // "command": "C:\\path\\to\\SEC-MCP\\start-mcp.bat"  // Windows
+     }
+   }
+   ```
+
+3. **Restart Cursor**
+   - The SEC tools will be available in Cursor's AI assistant
+   - Type `@SEC-MCP` to access the tools directly
+
+**Usage Example:**
+```
+@SEC-MCP search for Apple's latest 10-K filing
+```
+</details>
+
+### 🤖 Cline (VS Code Extension) Integration
+
+[Cline](https://github.com/saoudrizwan/claude-dev) is a powerful VS Code extension that brings Claude to your IDE.
+
+<details>
+<summary><b>📋 Cline Setup Instructions</b></summary>
+
+1. **Install Cline Extension**
+   - Open VS Code
+   - Go to Extensions (Cmd+Shift+X)
+   - Search for "Cline" and install
+
+2. **Configure MCP Server**
+   - Open VS Code settings (Cmd+,)
+   - Search for "Cline MCP"
+   - Add to `cline.mcpServers`:
+   ```json
+   {
+     "SEC-MCP": {
+       "command": "/path/to/SEC-MCP/start-mcp.sh"  // macOS/Linux
+       // "command": "C:\\path\\to\\SEC-MCP\\start-mcp.bat"  // Windows
+     }
+   }
+   ```
+
+3. **Access SEC Tools**
+   - Open Cline chat (Cmd+Shift+P → "Cline: Open Chat")
+   - SEC tools are now available in your coding sessions
+
+**Usage Example:**
+```
+Hey Cline, can you fetch Tesla's revenue data using SEC-MCP?
+```
+</details>
+
+### 🦘 Roo Coder Integration
+
+[Roo Coder](https://github.com/RooVetGit/Roo-Code) is an AI coding assistant that supports MCP protocol.
+
+<details>
+<summary><b>📋 Roo Coder Setup Instructions</b></summary>
+
+1. **Install Roo Coder**
+   ```bash
+   npm install -g roo-coder
+   ```
+
+2. **Configure MCP Server**
+   Create or edit `~/.roo-coder/config.json`:
+   ```json
+   {
+     "mcpServers": {
+       "SEC-MCP": {
+         "command": "/path/to/SEC-MCP/start-mcp.sh",  // macOS/Linux
+         // "command": "C:\\path\\to\\SEC-MCP\\start-mcp.bat",  // Windows
+         "env": {
+           "PYTHONPATH": "/path/to/SEC-MCP"
+         }
+       }
+     }
+   }
+   ```
+
+3. **Launch Roo Coder**
+   ```bash
+   roo-coder --enable-mcp
+   ```
+
+**Usage Example:**
+```
+@mcp SEC-MCP get_company_facts cik:0000320193
+```
+</details>
+
+### 📊 Integration Comparison
+
+| Feature | Claude Desktop | Cursor IDE | Cline (VS Code) | Roo Coder |
+|---------|---------------|------------|-----------------|-----------|
+| **Setup Difficulty** | ⭐ Easy | ⭐ Easy | ⭐⭐ Medium | ⭐⭐ Medium |
+| **Native MCP Support** | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
+| **Configuration Location** | JSON file | Settings UI | VS Code Settings | Config file |
+| **Best For** | General AI chat | AI-powered coding | VS Code users | Terminal users |
+| **Platform** | macOS, Windows | macOS, Windows, Linux | All platforms | All platforms |
+
+### ⚡ Quick Integration Tips
+
+- **All IDEs**: Ensure the full path to `start-mcp.sh` is used
+- **Windows Users**: Use forward slashes in paths or escape backslashes
+- **Permissions**: Make sure `start-mcp.sh` is executable (`chmod +x start-mcp.sh`)
+- **Python Environment**: The shell script handles `uv` environment automatically
+- **Testing**: Use the verification examples in each section to test your setup
 
 ### Available Tools
 
