@@ -53,21 +53,30 @@ Location: `%APPDATA%\Claude\claude_desktop_config.json`
 ```json
 {
   "mcpServers": {
-    "sec-mcp": {
-      "command": "uv",
-      "args": ["run", "-m", "run", "--port", "8000"],
-      "cwd": "/path/to/SEC-MCP"
+    "SEC-MCP": {
+      "url": "http://localhost:8000/sse"
     }
   }
 }
 ```
 
-Replace `/path/to/SEC-MCP` with the actual path where you cloned this repository.
+**Important**: This configuration requires the MCP server to be running separately.
 
-After adding the configuration:
-1. Restart Claude Desktop
-2. The SEC EDGAR tools will be available in your conversations
-3. You can verify by typing "search companies" and seeing the tool suggestion
+### Setup Steps:
+
+1. First, start the MCP server in a terminal:
+   ```bash
+   cd /path/to/SEC-MCP
+   uv run -m run --port 8000
+   ```
+
+2. Add the configuration above to your Claude Desktop config file
+
+3. Restart Claude Desktop
+
+4. The SEC EDGAR tools will now be available in your conversations
+
+5. You can verify by typing "search companies" and seeing the tool suggestion
 
 ### Available Tools
 
