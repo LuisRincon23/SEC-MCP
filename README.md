@@ -38,6 +38,37 @@ uv run -m run --port 8000
 
 The server will start on the specified port, ready to accept both local and remote SSE connections.
 
+## Claude Desktop Integration
+
+To use this MCP server with Claude Desktop, add the following configuration to your Claude Desktop config file:
+
+### macOS
+Location: `~/Library/Application Support/Claude/claude_desktop_config.json`
+
+### Windows
+Location: `%APPDATA%\Claude\claude_desktop_config.json`
+
+### Configuration
+
+```json
+{
+  "mcpServers": {
+    "sec-mcp": {
+      "command": "uv",
+      "args": ["run", "-m", "run", "--port", "8000"],
+      "cwd": "/path/to/SEC-MCP"
+    }
+  }
+}
+```
+
+Replace `/path/to/SEC-MCP` with the actual path where you cloned this repository.
+
+After adding the configuration:
+1. Restart Claude Desktop
+2. The SEC EDGAR tools will be available in your conversations
+3. You can verify by typing "search companies" and seeing the tool suggestion
+
 ### Available Tools
 
 1. **search_companies** - Search for companies by name, CIK, or ticker
