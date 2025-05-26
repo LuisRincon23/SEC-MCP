@@ -19,7 +19,7 @@ SEC MCP provides a streamlined interface to access SEC EDGAR data through the Mo
 
 ```bash
 # Clone the repository
-git clone https://github.com/rinadelph/SEC-MCP.git
+git clone https://github.com/LuisRincon23/SEC-MCP.git
 cd SEC-MCP
 
 # Install with uv
@@ -138,6 +138,10 @@ uv run -m run --port 8000 --debug
 ## License
 
 MIT License - see LICENSE file for details
+
+## Author
+
+Created by Luis Angel Rincon
 
 ## Contributing
 
