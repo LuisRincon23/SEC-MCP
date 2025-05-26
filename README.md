@@ -6,6 +6,8 @@ A Server-Sent Events (SSE) Model Context Protocol server for SEC EDGAR data acce
 
 SEC MCP provides a streamlined interface to access SEC EDGAR data through the Model Context Protocol. It supports real-time data streaming via SSE, making it ideal for both local development and remote deployment scenarios.
 
+Built with Python and the MCP framework, this server enables seamless integration with AI assistants and other tools that support the Model Context Protocol.
+
 ## Features
 
 - 🔍 **Company Search** - Search for companies by name, CIK, or ticker
