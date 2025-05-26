@@ -38,45 +38,110 @@ uv run -m run --port 8000
 
 The server will start on the specified port, ready to accept both local and remote SSE connections.
 
-## Claude Desktop Integration
+## 🚀 Claude Desktop Integration
 
-To use this MCP server with Claude Desktop, add the following configuration to your Claude Desktop config file:
+### ✨ Quick Setup (3 steps)
 
-### macOS
-Location: `~/Library/Application Support/Claude/claude_desktop_config.json`
+1. **Install SEC-MCP**
+   ```bash
+   git clone https://github.com/LuisRincon23/SEC-MCP.git
+   cd SEC-MCP
+   uv sync
+   ```
 
-### Windows
-Location: `%APPDATA%\Claude\claude_desktop_config.json`
+2. **Configure Claude Desktop**
+   
+   Open your Claude Desktop configuration file:
+   - **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+   - **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
 
-### Configuration
+   Add this configuration:
+   ```json
+   {
+     "mcpServers": {
+       "SEC-MCP": {
+         "command": "/path/to/SEC-MCP/start-mcp.sh"
+       }
+     }
+   }
+   ```
+   
+   > 💡 **Important**: Replace `/path/to/SEC-MCP` with your actual installation path
+
+3. **Restart Claude Desktop**
+   
+   That's it! The SEC EDGAR tools are now available in your conversations.
+
+### 🎯 Verify Installation
+
+Type any of these in Claude to see the tools in action:
+- "Search for Apple's SEC filings"
+- "Get Tesla's financial data"
+- "Show me Microsoft's recent 10-K"
+
+### 🛠️ Alternative Setup Methods
+
+<details>
+<summary><b>Method 1: Direct Python Command</b></summary>
+
+If you prefer not to use the shell script, you can configure Claude Desktop directly:
 
 ```json
 {
   "mcpServers": {
     "SEC-MCP": {
-      "url": "http://localhost:8000/sse"
+      "command": "/full/path/to/uv",
+      "args": ["run", "python", "run.py", "--transport", "stdio"],
+      "cwd": "/path/to/SEC-MCP"
     }
   }
 }
 ```
 
-**Important**: This configuration requires the MCP server to be running separately.
+> Find your `uv` path with: `which uv`
+</details>
 
-### Setup Steps:
+<details>
+<summary><b>Method 2: SSE Server (Remote Access)</b></summary>
 
-1. First, start the MCP server in a terminal:
+For remote access or advanced setups:
+
+1. Start the server:
    ```bash
-   cd /path/to/SEC-MCP
    uv run -m run --port 8000
    ```
 
-2. Add the configuration above to your Claude Desktop config file
+2. Configure Claude Desktop:
+   ```json
+   {
+     "mcpServers": {
+       "SEC-MCP": {
+         "url": "http://localhost:8000/sse"
+       }
+     }
+   }
+   ```
+</details>
 
-3. Restart Claude Desktop
+### 🔧 Troubleshooting
 
-4. The SEC EDGAR tools will now be available in your conversations
+If you encounter issues:
 
-5. You can verify by typing "search companies" and seeing the tool suggestion
+1. **Enable Developer Mode** (for detailed logs):
+   ```bash
+   echo '{"allowDevTools": true}' > ~/Library/Application\ Support/Claude/developer_settings.json
+   ```
+   Then use `Cmd+Option+Shift+I` in Claude Desktop to see logs.
+
+2. **Check Logs**:
+   ```bash
+   tail -f ~/Library/Logs/Claude/mcp-server-SEC-MCP.log
+   ```
+
+3. **Common Issues**:
+   - **"spawn ENOENT"**: The path to `uv` or the script is incorrect
+   - **"No module named..."**: Working directory (`cwd`) is incorrect
+   - **Server disconnects**: Check that all dependencies are installed with `uv sync`
 
 ### Available Tools
 
@@ -93,9 +158,10 @@ import asyncio
 from mcp import ClientSession, StdioServerParameters
 
 async def main():
+    # For stdio connection
     server_params = StdioServerParameters(
         command="uv",
-        args=["run", "-m", "main", "--port", "8000"]
+        args=["run", "-m", "run", "--transport", "stdio"]
     )
     
     async with ClientSession(server_params) as session:
@@ -160,6 +226,7 @@ The server accepts the following command-line arguments:
 
 - `--port` - Port number for the SSE server (default: 8000)
 - `--host` - Host address to bind to (default: localhost)
+- `--transport` - Transport type: `stdio` or `sse` (default: sse)
 
 ## Requirements
 
