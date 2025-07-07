@@ -1,0 +1,20 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mcp-template"
+version = "0.1.0"
+description = "MCP Server Template"
+requires-python = ">=3.8"
+dependencies = [
+    "anyio",
+    "click",
+    "mcp[cli]",
+    "starlette",
+    "uvicorn",
+    "httpx",
+]
+
+[tool.uv]
+exclude = ["tests"] 

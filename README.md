@@ -1,408 +1,286 @@
-# SEC MCP 📊
+# Financial MCPs - PhD-Level Research Tools for Claude Code CLI
 
-A Server-Sent Events (SSE) Model Context Protocol server for SEC EDGAR data access. Enables both remote and local connections to retrieve SEC filing data, company information, and financial facts.
+A comprehensive collection of advanced Model Context Protocol (MCP) servers that transform Claude Code CLI into an institutional-grade financial research platform.
 
 <div align="center">
 
 [![MCP Protocol](https://img.shields.io/badge/MCP-Protocol-blue)](https://modelcontextprotocol.io)
-[![Python](https://img.shields.io/badge/Python-3.9+-green)](https://python.org)
+[![Claude Code](https://img.shields.io/badge/Claude_Code-CLI-purple)](https://github.com/anthropics/claude-cli)
+[![Python](https://img.shields.io/badge/Python-3.10+-green)](https://python.org)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 
-**Integrations:** [Claude Desktop](#-claude-desktop-integration) • [Cursor](#-cursor-ide-integration) • [Cline](#-cline-vs-code-extension-integration) • [Roo Coder](#-roo-coder-integration)
+**8 Specialized MCPs** • **PhD-Level Analysis** • **Institutional Quality**
 
 </div>
 
-## 📋 Table of Contents
+## 🎓 Overview
 
-- [Overview](#overview)
-- [Features](#features)
-- [Installation](#installation)
-- [Quick Start](#-claude-desktop-integration)
-- [IDE Integrations](#-ide--code-assistant-integrations)
-- [API Examples](#api-examples)
-- [Development](#development)
-- [Troubleshooting](#-troubleshooting)
+This repository contains 8 specialized MCP servers that provide Claude Code CLI with capabilities rivaling professional financial platforms used by hedge funds and investment banks:
 
-## Overview
+| MCP | Description | Key Features |
+|-----|-------------|--------------|
+| **SEC Scraper** | XBRL parsing & comprehensive analysis | DCF modeling, Monte Carlo simulations |
+| **News Sentiment** | Advanced NLP for financial text | Context-aware sentiment, earnings call analysis |
+| **Analyst Ratings** | Consensus tracking & peer comparison | Rating aggregation, price target analysis |
+| **Institutional** | Ownership & fund flow analysis | 13F tracking, insider transactions |
+| **Alternative Data** | Web scraping for unique insights | Hiring trends, social sentiment, reviews |
+| **Industry Assumptions** | Sector analysis & modeling | WACC calculations, peer metrics |
+| **Economic Data** | Macro indicators & regime detection | Fed data, employment, inflation |
+| **Research Admin** | Report generation & orchestration | 25+ page institutional reports |
 
-SEC MCP provides a streamlined interface to access SEC EDGAR data through the Model Context Protocol. It supports real-time data streaming via SSE, making it ideal for both local development and remote deployment scenarios.
+## 🚀 Features
 
-Built with Python and the MCP framework, this server enables seamless integration with AI assistants and other tools that support the Model Context Protocol.
+### Advanced Financial Analysis
+- **XBRL Parsing**: Extract 50+ structured metrics from SEC filings
+- **DCF Valuation**: Monte Carlo simulations with 10,000 iterations
+- **Financial Metrics**: ROE, ROIC, Altman Z-Score, Piotroski F-Score
+- **Peer Comparison**: Automatic competitor identification and analysis
 
-## Features
+### Market Intelligence
+- **PhD-Level NLP**: Context-aware sentiment analysis for earnings calls
+- **Technical Analysis**: RSI, MACD, Bollinger Bands, support/resistance
+- **Market Regime Detection**: Bull/bear market identification
+- **Sector Rotation**: Industry trend and momentum analysis
 
-- 🔍 **Company Search** - Search for companies by name, CIK, or ticker
-- 📄 **Filing Access** - Download and retrieve SEC filings  
-- 📊 **Financial Data** - Access company facts and concept data
-- 🚀 **SSE Support** - Real-time data streaming for remote connections
-- ⚡ **Async Operations** - High-performance async API client
-- 🔒 **Rate Limiting** - Built-in rate limiting for SEC compliance
+### Research Output
+- **Institutional Reports**: Professional 25+ page equity research documents
+- **Investment Thesis**: Comprehensive bull/bear cases with catalysts
+- **Risk Assessment**: Multi-factor risk scoring and analysis
+- **Quality Metrics**: Data completeness and confidence scoring
 
-## Installation
+## 📦 Installation
 
+### Prerequisites
+- Python 3.10+
+- Claude Code CLI (`npm install -g @anthropic-ai/claude-cli`)
+- uv package manager (`pip install uv`)
+
+### Quick Setup
+
+1. **Clone the repository**:
 ```bash
-# Clone the repository
-git clone https://github.com/LuisRincon23/SEC-MCP.git
-cd SEC-MCP
+git clone https://github.com/yourusername/financial-mcps.git
+cd financial-mcps
+```
 
-# Install with uv
+2. **Create and activate virtual environment**:
+```bash
+uv venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+```
+
+3. **Install dependencies**:
+```bash
 uv sync
 ```
 
-## Usage
-
-Run the MCP server using uv:
-
+4. **Add all MCPs to Claude Code CLI**:
 ```bash
-uv run -m run --port 8000
+# Run the setup script
+./setup_all_mcps.sh
+
+# Or manually add each MCP:
+claude mcp add SEC "./FinancialMCPs/SEC_SCRAPER_MCP/start-mcp.sh" --transport stdio
+claude mcp add NEWS-SENTIMENT "./FinancialMCPs/NEWS_SENTIMENT_SCRAPER/start-mcp.sh" --transport stdio
+claude mcp add ANALYST-RATINGS "./FinancialMCPs/ANALYST_RATINGS_SCRAPER/start-mcp.sh" --transport stdio
+claude mcp add INSTITUTIONAL "./FinancialMCPs/INSTITUTIONAL_SCRAPER/start-mcp.sh" --transport stdio
+claude mcp add ALTERNATIVE-DATA "./FinancialMCPs/ALTERNATIVE_DATA_SCRAPER/start-mcp.sh" --transport stdio
+claude mcp add INDUSTRY-ASSUMPTIONS "./FinancialMCPs/INDUSTRY_ASSUMPTIONS_ENGINE/start-mcp.sh" --transport stdio
+claude mcp add ECONOMIC-DATA "./FinancialMCPs/ECONOMIC_DATA_COLLECTOR/start-mcp.sh" --transport stdio
+claude mcp add RESEARCH-ADMIN "./FinancialMCPs/RESEARCH_ADMINISTRATOR/start-mcp.sh" --transport stdio
 ```
 
-The server will start on the specified port, ready to accept both local and remote SSE connections.
+5. **Verify installation**:
+```bash
+claude mcp list
+# Should show all 8 Financial MCPs
+```
 
-## 🚀 Claude Desktop Integration
+## 💡 Usage Examples
 
-### ✨ Quick Setup (3 steps)
+### Basic Commands
 
-1. **Install SEC-MCP**
-   ```bash
-   git clone https://github.com/LuisRincon23/SEC-MCP.git
-   cd SEC-MCP
-   uv sync
-   ```
+```bash
+# Get current stock price
+Use SEC to get current price for ticker "AAPL"
 
-2. **Configure Claude Desktop**
-   
-   Open your Claude Desktop configuration file:
-   - **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
-   - **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+# Analyze sentiment
+Use NEWS-SENTIMENT to analyze sentiment for ticker "MSFT"
 
-   Add this configuration:
-   ```json
-   {
-     "mcpServers": {
-       "SEC-MCP": {
-         "command": "/path/to/SEC-MCP/start-mcp.sh"  // macOS/Linux
-         // "command": "C:\\path\\to\\SEC-MCP\\start-mcp.bat"  // Windows
-       }
-     }
-   }
-   ```
-   
-   > 💡 **Important**: Replace `/path/to/SEC-MCP` with your actual installation path
+# Get analyst consensus
+Use ANALYST-RATINGS to get consensus rating for ticker "GOOGL"
+```
 
-3. **Restart Claude Desktop**
-   
-   That's it! The SEC EDGAR tools are now available in your conversations.
+### Advanced Analysis
 
-### 🎯 Verify Installation
+```bash
+# Comprehensive stock analysis (PhD-level)
+Use SEC to perform comprehensive analysis for ticker "NVDA"
 
-Type any of these in Claude to see the tools in action:
-- "Search for Apple's SEC filings"
-- "Get Tesla's financial data"
-- "Show me Microsoft's recent 10-K"
+# Generate institutional research report
+Use RESEARCH-ADMIN to generate research report for ticker "TSLA"
 
-### 🛠️ Alternative Setup Methods
+# Sector analysis
+Use INDUSTRY-ASSUMPTIONS to analyze sector "Technology"
+```
 
-<details>
-<summary><b>Method 1: Direct Python Command</b></summary>
+### Professional Workflows
 
-If you prefer not to use the shell script, you can configure Claude Desktop directly:
+#### Investment Research Workflow
+```bash
+1. Use SEC to perform comprehensive analysis for ticker "META"
+2. Use NEWS-SENTIMENT to analyze earnings call sentiment for ticker "META"  
+3. Use ANALYST-RATINGS to compare with peer ratings
+4. Use RESEARCH-ADMIN to generate investment thesis
+```
 
-```json
-{
-  "mcpServers": {
-    "SEC-MCP": {
-      "command": "/full/path/to/uv",
-      "args": ["run", "python", "run.py", "--transport", "stdio"],
-      "cwd": "/path/to/SEC-MCP"
-    }
-  }
+#### Risk Assessment Workflow
+```bash
+1. Use SEC to calculate Altman Z-Score for ticker "GME"
+2. Use INSTITUTIONAL to track ownership changes
+3. Use ECONOMIC-DATA to assess macro risks
+4. Use ALTERNATIVE-DATA to gauge social sentiment
+```
+
+## 🏗️ Architecture
+
+```
+financial-mcps/
+├── FinancialMCPs/
+│   ├── SEC_SCRAPER_MCP/           # XBRL parsing, DCF modeling
+│   ├── NEWS_SENTIMENT_SCRAPER/    # Advanced NLP sentiment
+│   ├── ANALYST_RATINGS_SCRAPER/   # Consensus tracking
+│   ├── INSTITUTIONAL_SCRAPER/     # Ownership analysis
+│   ├── ALTERNATIVE_DATA_SCRAPER/  # Web scraping
+│   ├── INDUSTRY_ASSUMPTIONS/      # Sector analysis
+│   ├── ECONOMIC_DATA_COLLECTOR/   # Macro indicators
+│   ├── RESEARCH_ADMINISTRATOR/    # Report generation
+│   └── shared/                    # Shared advanced modules
+│       ├── financial_analysis.py  # DCF, metrics calculations
+│       ├── xbrl_parser.py        # XBRL data extraction
+│       ├── advanced_nlp.py       # PhD-level NLP
+│       ├── research_report_generator.py
+│       └── data_cache.py         # Intelligent caching
+├── setup_all_mcps.sh             # Quick setup script
+├── test_phd_features.py          # Integration tests
+├── requirements.txt
+├── README.md
+└── LICENSE
+```
+
+## 🔧 Configuration
+
+### MCP-Specific Settings
+
+Each MCP can be configured through environment variables:
+```bash
+export CACHE_DIR="/tmp/financial_mcp_cache"
+export LOG_LEVEL="INFO"
+export RATE_LIMIT_DELAY="1.0"  # SEC compliance
+```
+
+### Analysis Parameters
+
+Edit `analysis_config` in each MCP's main.py:
+```python
+self.analysis_config = {
+    'dcf_years': 5,              # DCF projection years
+    'peer_count': 10,            # Number of peers to analyze
+    'monte_carlo_simulations': 10000,  # Simulation count
+    'confidence_threshold': 0.8   # Minimum confidence score
 }
 ```
 
-> Find your `uv` path with: `which uv`
-</details>
+### Cache Settings
 
-<details>
-<summary><b>Method 2: SSE Server (Remote Access)</b></summary>
-
-For remote access or advanced setups:
-
-1. Start the server:
-   ```bash
-   uv run -m run --port 8000
-   ```
-
-2. Configure Claude Desktop:
-   ```json
-   {
-     "mcpServers": {
-       "SEC-MCP": {
-         "url": "http://localhost:8000/sse"
-       }
-     }
-   }
-   ```
-</details>
-
-### 🔧 Troubleshooting
-
-If you encounter issues:
-
-1. **Enable Developer Mode** (for detailed logs):
-   ```bash
-   echo '{"allowDevTools": true}' > ~/Library/Application\ Support/Claude/developer_settings.json
-   ```
-   Then use `Cmd+Option+Shift+I` in Claude Desktop to see logs.
-
-2. **Check Logs**:
-   ```bash
-   tail -f ~/Library/Logs/Claude/mcp-server-SEC-MCP.log
-   ```
-
-3. **Common Issues**:
-   - **"spawn ENOENT"**: The path to `uv` or the script is incorrect
-   - **"No module named..."**: Working directory (`cwd`) is incorrect
-   - **Server disconnects**: Check that all dependencies are installed with `uv sync`
-
-## 🔌 IDE & Code Assistant Integrations
-
-### 💻 Cursor IDE Integration
-
-[Cursor](https://cursor.sh) is an AI-powered IDE that supports MCP servers natively.
-
-<details>
-<summary><b>📋 Cursor Setup Instructions</b></summary>
-
-1. **Open Cursor Settings**
-   - Press `Cmd+,` (macOS) or `Ctrl+,` (Windows/Linux)
-   - Navigate to `Features` → `MCP Servers`
-
-2. **Add SEC-MCP Configuration**
-   ```json
-   {
-     "SEC-MCP": {
-       "command": "/path/to/SEC-MCP/start-mcp.sh"  // macOS/Linux
-       // "command": "C:\\path\\to\\SEC-MCP\\start-mcp.bat"  // Windows
-     }
-   }
-   ```
-
-3. **Restart Cursor**
-   - The SEC tools will be available in Cursor's AI assistant
-   - Type `@SEC-MCP` to access the tools directly
-
-**Usage Example:**
-```
-@SEC-MCP search for Apple's latest 10-K filing
-```
-</details>
-
-### 🤖 Cline (VS Code Extension) Integration
-
-[Cline](https://github.com/saoudrizwan/claude-dev) is a powerful VS Code extension that brings Claude to your IDE.
-
-<details>
-<summary><b>📋 Cline Setup Instructions</b></summary>
-
-1. **Install Cline Extension**
-   - Open VS Code
-   - Go to Extensions (Cmd+Shift+X)
-   - Search for "Cline" and install
-
-2. **Configure MCP Server**
-   - Open VS Code settings (Cmd+,)
-   - Search for "Cline MCP"
-   - Add to `cline.mcpServers`:
-   ```json
-   {
-     "SEC-MCP": {
-       "command": "/path/to/SEC-MCP/start-mcp.sh"  // macOS/Linux
-       // "command": "C:\\path\\to\\SEC-MCP\\start-mcp.bat"  // Windows
-     }
-   }
-   ```
-
-3. **Access SEC Tools**
-   - Open Cline chat (Cmd+Shift+P → "Cline: Open Chat")
-   - SEC tools are now available in your coding sessions
-
-**Usage Example:**
-```
-Hey Cline, can you fetch Tesla's revenue data using SEC-MCP?
-```
-</details>
-
-### 🦘 Roo Coder Integration
-
-[Roo Coder](https://github.com/RooVetGit/Roo-Code) is an AI coding assistant that supports MCP protocol.
-
-<details>
-<summary><b>📋 Roo Coder Setup Instructions</b></summary>
-
-1. **Install Roo Coder**
-   ```bash
-   npm install -g roo-coder
-   ```
-
-2. **Configure MCP Server**
-   Create or edit `~/.roo-coder/config.json`:
-   ```json
-   {
-     "mcpServers": {
-       "SEC-MCP": {
-         "command": "/path/to/SEC-MCP/start-mcp.sh",  // macOS/Linux
-         // "command": "C:\\path\\to\\SEC-MCP\\start-mcp.bat",  // Windows
-         "env": {
-           "PYTHONPATH": "/path/to/SEC-MCP"
-         }
-       }
-     }
-   }
-   ```
-
-3. **Launch Roo Coder**
-   ```bash
-   roo-coder --enable-mcp
-   ```
-
-**Usage Example:**
-```
-@mcp SEC-MCP get_company_facts cik:0000320193
-```
-</details>
-
-### 📊 Integration Comparison
-
-| Feature | Claude Desktop | Cursor IDE | Cline (VS Code) | Roo Coder |
-|---------|---------------|------------|-----------------|-----------|
-| **Setup Difficulty** | ⭐ Easy | ⭐ Easy | ⭐⭐ Medium | ⭐⭐ Medium |
-| **Native MCP Support** | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
-| **Configuration Location** | JSON file | Settings UI | VS Code Settings | Config file |
-| **Best For** | General AI chat | AI-powered coding | VS Code users | Terminal users |
-| **Platform** | macOS, Windows | macOS, Windows, Linux | All platforms | All platforms |
-
-### ⚡ Quick Integration Tips
-
-- **All IDEs**: Ensure the full path to `start-mcp.sh` is used
-- **Windows Users**: Use forward slashes in paths or escape backslashes
-- **Permissions**: Make sure `start-mcp.sh` is executable (`chmod +x start-mcp.sh`)
-- **Python Environment**: The shell script handles `uv` environment automatically
-- **Testing**: Use the verification examples in each section to test your setup
-
-### Available Tools
-
-1. **search_companies** - Search for companies by name, CIK, or ticker
-2. **get_company_submissions** - Retrieve all SEC submissions for a company
-3. **get_company_facts** - Get standardized company facts data
-4. **get_company_concept** - Access specific XBRL concepts for a company
-5. **download_filing** - Download filing documents by URL
-
-### Example Client Connection
-
+Configure cache TTL in `shared/data_cache.py`:
 ```python
-import asyncio
-from mcp import ClientSession, StdioServerParameters
-
-async def main():
-    # For stdio connection
-    server_params = StdioServerParameters(
-        command="uv",
-        args=["run", "-m", "run", "--transport", "stdio"]
-    )
-    
-    async with ClientSession(server_params) as session:
-        # Search for a company
-        result = await session.call_tool(
-            "search_companies",
-            {"query": "Apple Inc"}
-        )
-        print(result)
-
-asyncio.run(main())
+self.ttl_config = {
+    'price_data': timedelta(minutes=5),
+    'financial_statements': timedelta(days=90),
+    'news': timedelta(hours=1),
+    'research_reports': timedelta(days=30)
+}
 ```
 
-## API Examples
+## 🧪 Testing
 
-### Search Companies
-```python
-# Search by company name
-result = await session.call_tool(
-    "search_companies",
-    {"query": "Tesla"}
-)
-
-# Search by CIK
-result = await session.call_tool(
-    "search_companies", 
-    {"query": "0001318605"}
-)
-```
-
-### Get Company Filings
-```python
-# Get all submissions for a company
-filings = await session.call_tool(
-    "get_company_submissions",
-    {"cik": "0001318605"}
-)
-```
-
-### Access Financial Data
-```python
-# Get company facts
-facts = await session.call_tool(
-    "get_company_facts",
-    {"cik": "0000320193"}  # Apple Inc
-)
-
-# Get specific concept data
-revenue = await session.call_tool(
-    "get_company_concept",
-    {
-        "cik": "0000320193",
-        "taxonomy": "us-gaap", 
-        "tag": "Revenue"
-    }
-)
-```
-
-## Configuration
-
-The server accepts the following command-line arguments:
-
-- `--port` - Port number for the SSE server (default: 8000)
-- `--host` - Host address to bind to (default: localhost)
-- `--transport` - Transport type: `stdio` or `sse` (default: sse)
-
-## Requirements
-
-- Python 3.9+
-- uv package manager
-- Dependencies managed via `pyproject.toml`
-
-## Development
-
+### Run All Tests
 ```bash
-# Run tests
-uv run pytest
-
-# Run with debug logging
-uv run -m run --port 8000 --debug
+python test_phd_features.py
 ```
 
-## License
+### Test Individual MCPs
+```bash
+./test_single_mcp.sh SEC_SCRAPER_MCP
+```
 
-MIT License - see LICENSE file for details
+### Debug Mode
+```bash
+claude --debug
+# Then use any MCP command to see detailed logs
+```
 
-## Author
+## 📊 Data Sources
 
-Created by Luis Angel Rincon
+- **SEC EDGAR**: Official filings, XBRL data
+- **Yahoo Finance**: Real-time prices, basic metrics
+- **Finviz**: News aggregation, analyst ratings
+- **MarketWatch**: Additional market data
+- **Federal Reserve**: Economic indicators
+- **Alternative Sources**: Indeed, Glassdoor, Reddit, Google Trends
 
-## Contributing
+## 🔒 Security & Compliance
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+- **Rate Limiting**: Built-in delays to respect data source limits
+- **User Agent**: Proper identification for web scraping
+- **Caching**: Reduces redundant requests
+- **Data Validation**: Ensures data quality and accuracy
 
-## Acknowledgments
+## ⚠️ Disclaimer
 
-Built using the Model Context Protocol (MCP) and SEC EDGAR API.
+These tools are for **educational and research purposes only**. Not intended for:
+- Production trading systems
+- Real money investment decisions
+- High-frequency trading
+- Regulatory compliance
+
+Always verify data independently and conduct your own due diligence.
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for:
+- Code style guidelines
+- Testing requirements
+- Pull request process
+- Feature request procedure
+
+## 📈 Roadmap
+
+- [ ] Bloomberg/Refinitiv data integration
+- [ ] Real-time streaming capabilities
+- [ ] Machine learning predictions
+- [ ] Options analytics
+- [ ] Portfolio optimization
+- [ ] Backtesting framework
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Built for [Claude Code CLI](https://github.com/anthropics/claude-cli) by Anthropic
+- Inspired by institutional research platforms
+- Uses publicly available financial data sources
+- Special thanks to the MCP community
+
+## 📞 Support
+
+- **Issues**: [GitHub Issues](https://github.com/yourusername/financial-mcps/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/yourusername/financial-mcps/discussions)
+- **Documentation**: [Wiki](https://github.com/yourusername/financial-mcps/wiki)
+
+---
+
+**Note**: This is an advanced financial research toolkit. Users should have a solid understanding of financial analysis and Python programming. These MCPs provide PhD-level analysis capabilities previously only available to institutional investors.

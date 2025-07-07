@@ -4,31 +4,16 @@ __pycache__/
 *$py.class
 *.so
 .Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
-# Virtual environments
-.env
-.venv
 env/
 venv/
+.venv/
 ENV/
 env.bak/
 venv.bak/
+
+# Virtual environments
+.uv/
+.venv/
 
 # IDE
 .vscode/
@@ -37,66 +22,64 @@ venv.bak/
 *.swo
 *~
 
-# Testing
-.coverage
-.pytest_cache/
-.tox/
-.nox/
-htmlcov/
-.coverage.*
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# pyenv
-.python-version
-
-# pipenv
-Pipfile.lock
-
-# PEP 582
-__pypackages__/
-
-# Celery
-celerybeat-schedule
-celerybeat.pid
-
-# SageMath
-*.sage.py
-
-# Environments
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# macOS
+# OS
 .DS_Store
-
-# Windows
 Thumbs.db
-ehthumbs.db
-Desktop.ini
-
-# Node.js
-node_modules/
 
 # Logs
 *.log
 logs/
+mcp-server-*.log
+
+# Cache
+/tmp/
+cache/
+*_cache/
+*.cache
+
+# Data files
+*.csv
+*.xlsx
+*.json
+\!claude_desktop_config.json
+\!pyproject.toml
+\!package.json
+
+# Sensitive data
+.env
+.env.local
+secrets/
+credentials/
+
+# Test coverage
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+.pytest_cache/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Documentation build
+docs/_build/
+site/
 
 # Temporary files
 *.tmp
 *.temp
-temp/
-tmp/
+*.bak
 
-# Downloaded SEC filings
-*.txt
-downloads/
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# MCP specific
+mcp_cache/
+data_quality_report.json
+EOF < /dev/null

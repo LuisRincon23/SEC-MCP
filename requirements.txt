@@ -1,0 +1,30 @@
+# Core MCP dependencies
+mcp[cli]>=1.0.0
+
+# Async and networking
+aiohttp>=3.9.0
+httpx>=0.25.0
+anyio>=4.0.0
+
+# Web scraping
+beautifulsoup4>=4.12.0
+lxml>=5.0.0
+
+# Data analysis
+numpy>=1.24.0
+pandas>=2.0.0
+scipy>=1.10.0
+
+# Utilities
+click>=8.1.0
+python-dotenv>=1.0.0
+
+# Server dependencies
+starlette>=0.36.0
+uvicorn>=0.27.0
+
+# Date handling
+python-dateutil>=2.8.2
+
+# For Brotli compression support
+brotli>=1.1.0
